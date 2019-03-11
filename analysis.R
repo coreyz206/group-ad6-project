@@ -18,3 +18,19 @@ world_map_updated <- mutate(
   Country.Code == iso.alpha(world_map$region, n = 3)
 )
 
+#what needs to be done:
+##Each of us need to ask a couple of analytical questions that we can then answer using the data?
+###The requirements say that we can't just include visualizations, we should for each question, but we also need to answer the question
+###using our data. 
+
+##QUESTIONS - choice one (maternal, life, income)
+#How does income per capita effect the life expectancy and and maternal mortality rate, is a positive or negative correlation or no correlation?
+#What is the average life expectancy in the world and for each country?
+#Why are maternal mortality rates different between countries, does it tie into income per capita
+#What countries have the highest and lowest life expectancies, what is the average life expectancy?
+
+##QUESTIONS - choice two (co2 emissions, urban population, gdp per capita)
+#Does the GDP per capita effect the amount of co2 emissions by a country? 
+#Do countries that have a higher urban population percent tend to see, a higher gdp per capita?
+#Do countries with high co2 emissions have a greater density of urban population?
+#Which countries have the lowest and highest amounts of co2 emissions and why? 
