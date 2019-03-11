@@ -4,11 +4,6 @@ library("ggplot2")
 library("maps")
 library("mapproj")
 
-<<<<<<< HEAD
-library(foreign)
-
-pew_dataset <- read.spss("./data/pew_dataset.sav")
-=======
 maternal_mortality_rate <- read.csv("data/maternal_mortality_filtered.csv", stringsAsFactors = FALSE)
 life_expectancy_at_birth <- read.csv("data/life_expectancy_at_birth_filtered.csv", stringsAsFactors = FALSE)
 gdp_per_capita <- read.csv("data/gdp_per_capita_filtered.csv", stringsAsFactors = FALSE)
@@ -72,4 +67,3 @@ co2_and_urban_change <- mutate(
 ###must have interactive widgets and answer our critical questions
 ####optional, use some css to style our shiny app so that it doesn't look so plain, only if time permitting
 ##We should try to make an interactive map
->>>>>>> 3897c7ad86ed2c723bec353d7c12d62e77312bf8
