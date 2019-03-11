@@ -17,3 +17,4 @@ world_map_updated <- mutate(
   world_map,
   Country.Code == iso.alpha(world_map$region, n = 3)
 )
+
