@@ -36,6 +36,29 @@ world_map_updated <- mutate(
 #Which countries have the lowest and highest amounts of co2 emissions and why? 
 
 
+#these can all be made into tables and maps now
+gdp_and_urban_pop <- left_join(gdp_per_capita, urban_population, by = "Country.Name")
+gdp_and_urban_change <- mutate(
+  gdp_and_urban_pop,
+  urban_change = X2014.y - X1990.y,
+  gdp_change = X2014.x - X1990.x
+)
+
+gdp_and_co2 <- left_join(gdp_per_capita, co2_emissions, by = "Country.Name")
+gdp_and_co2_change <- mutate(
+  gdp_and_co2,
+  co2_change = X2014.y - X1990.y,
+  gdp_change = X2014.x - X1990.x
+)
+
+co2_and_urban <- left_join(co2_emissions, urban_population, by = "Country.Name")
+co2_and_urban_change <- mutate(
+  co2_and_urban,
+  co2_change = X2014.x - X1990.x,
+  urban_change = X2014.y - X1990.y
+)
+
+
 ##shiny app
 ###must be interactive, include visualizations, text must be interactive based on user selections
 ###must have links to where we got the information from
