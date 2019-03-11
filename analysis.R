@@ -34,3 +34,11 @@ world_map_updated <- mutate(
 #Do countries that have a higher urban population percent tend to see, a higher gdp per capita?
 #Do countries with high co2 emissions have a greater density of urban population?
 #Which countries have the lowest and highest amounts of co2 emissions and why? 
+
+
+##shiny app
+###must be interactive, include visualizations, text must be interactive based on user selections
+###must have links to where we got the information from
+###must have interactive widgets and answer our critical questions
+####optional, use some css to style our shiny app so that it doesn't look so plain, only if time permitting
+##We should try to make an interactive map
