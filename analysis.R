@@ -1,5 +1,6 @@
 ### PLACEHOLDER ###
 library("dplyr")
+library("ggplot2")
 
 maternal_mortality_rate <- read.csv("data/maternal_mortality_filtered.csv", stringsAsFactors = FALSE)
 life_expectancy_at_birth <- read.csv("data/life_expectancy_at_birth_filtered.csv", stringsAsFactors = FALSE)
