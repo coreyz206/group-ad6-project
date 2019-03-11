@@ -1,31 +1,12 @@
 ### PLACEHOLDER ###
-library("ZillowR")
-library("httr")
-library("jsonlite")
-library("plyr")   
 library("dplyr")
-library("XML")
 
-
-source("api_key.R")
-
-
-base_uri <- "http://www.zillow.com/webservice/"
-neighborhood_endpoint <- "GetRegionChildren.htm?"
-demographics_endpoint <- "GetDemographics.htm"
-
-response_zillow <- GET(paste0(base_uri, neighborhood_endpoint, "zws-id=", zwsid, "&state=", "wa", "&city=seattle"))
-
-response_test <- GET(paste0("http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=", zwsid, "&state=wa&city=seattle&childtype=neighborhood"))
-#response_chart <- GET("http://www.zillow.com/webservice/GetRegionChart.htm?zws-id=<zwsid&state=wa&city=seattle&childtype=neighborhood")
-response_zillow_text <- content(response_zillow, "text")
-response_zillow_data <- xmlParse("GetRegionChildren.xml")
-
-response_zillow_text
-response_zillow_data
-
-as.data.frame(response_zillow_data)
-
-
+maternal_mortality_rate <- read.csv("data/maternal_mortality_filtered.csv", stringsAsFactors = FALSE)
+life_expectancy_at_birth <- read.csv("data/life_expectancy_at_birth_filtered.csv", stringsAsFactors = FALSE)
+gdp_per_capita <- read.csv("data/gdp_per_capita_filtered.csv", stringsAsFactors = FALSE)
+income_per_capita <- read.csv("data/income_per_capita_filtered.csv", stringsAsFactors = FALSE)
+unemployment_percent <- read.csv("data/unemployment_percent_filtered.csv", stringsAsFactors = FALSE)
+co2_emissions <- read.csv("data/co2_emissions_filtered.csv", stringsAsFactors = FALSE)
+urban_population <- read.csv("data/urban_population_percent_filtered.csv", stringsAsFactors = FALSE)
 
 
