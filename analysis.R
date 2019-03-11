@@ -56,6 +56,7 @@ co2_and_urban_change <- mutate(
   urban_change = X2014.y - X1990.y
 )
 
+all_three <- left_join(co2_and_urban, gdp_per_capita, by = "Country.Name")
 
 ##shiny app
 ###must be interactive, include visualizations, text must be interactive based on user selections
