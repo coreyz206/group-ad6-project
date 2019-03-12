@@ -24,4 +24,8 @@ my_server <- function(input, output) {
     )
     comparison_by_year
   })
+  
+  output$table_text <- renderText({
+    table_description <- paste("The above table of data provides the name of the country, ")
+  })
 }
