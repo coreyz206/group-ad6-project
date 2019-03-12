@@ -5,6 +5,11 @@ library("ggplot2")
 
 
 my_server <- function(input, output) {
+  output$intro <- renderText({
+    intro_text <- "This is the intro, make sure to actually make it an introduction"
+    intro_text
+  })
+  
   output$datasets_by_year <- renderDataTable({
     comparison_by_year <- all_three %>% 
       select(
@@ -25,7 +30,9 @@ my_server <- function(input, output) {
     comparison_by_year
   })
   
+  #need to finish this description
   output$table_text <- renderText({
-    table_description <- paste("The above table of data provides the name of the country, ")
+    table_description <- paste("The above table of data provides the name of the country")
+    table_description
   })
 }

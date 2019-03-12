@@ -3,6 +3,11 @@
 my_ui <- fluidPage(
   titlePanel("CO2 Emissions and GDP"),
   navbarPage("Something",
+    tabPanel("Introduction",
+      mainPanel(
+        textOutput(outputId = "intro")
+      )  
+    ),
     tabPanel("Table",
       sidebarLayout(
         sidebarPanel(
@@ -15,9 +20,6 @@ my_ui <- fluidPage(
           dataTableOutput(outputId = "datasets_by_year"), textOutput(outputId = "table_text")
         )
       )
-    ),
-    tabPanel(
-      
     )
   )
 )
