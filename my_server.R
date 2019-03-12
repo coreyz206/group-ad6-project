@@ -35,4 +35,22 @@ my_server <- function(input, output) {
     table_description <- paste("The above table of data provides the name of the country")
     table_description
   })
+  
+  output$scatter <- renderPlot({
+    co2_and_urban <- mutate(
+      co2_and_urban,
+      co2_change = paste0("X", input$year_difference[2], ".x") - paste0("X", input$year_difference[1], ".x"),
+      urban_change = paste0("X", input$year_difference[2], ".y") - paste0("X", input$year_difference[1], ".y")
+    )
+    #I need to get this working for changing years, also need to get the trendline to switch on or off based on checkbox
+    point_plot <- ggplot(data = co2_and_urban) +
+      geom_point(x = urban_change, y = co2_change) +
+      geom_smooth()
+    point_plot
+  })
+  
+  output$scatter_text <- renderText({
+    point_message <- "I just need to put a placeholder here for the time being"
+    point_message
+  })
 }
