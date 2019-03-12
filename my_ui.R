@@ -15,6 +15,9 @@ my_ui <- fluidPage(
           dataTableOutput(outputId = "datasets_by_year"), textOutput(outputId = "table_text")
         )
       )
+    ),
+    tabPanel(
+      
     )
   )
 )
