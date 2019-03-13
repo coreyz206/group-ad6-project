@@ -97,3 +97,25 @@ all_three <- left_join(co2_and_urban, gdp_per_capita, by = "Country.Name")
 ###must have interactive widgets and answer our critical questions
 ####optional, use some css to style our shiny app so that it doesn't look so plain, only if time permitting
 ##We should try to make an interactive map
+
+
+## Data Processing for Comparative Column Chart
+
+country_names <- all_three$Country.Name
+indicator_names<- c(all_three$Indicator.Name.x[1], all_three$Indicator.Name.y[1], all_three$Indicator.Name[1])
+
+co2_col <- co2_emissions %>%
+  gather(key = year, value = "CO2 emissions (metric tons per capita)", 
+         -Country.Name, -Country.Code, -Indicator.Name, -Indicator.Code) %>% 
+  select(-Indicator.Code)
+
+
+urban_col <- urban_population %>%
+  gather(key = year, value = "Urban population (% of total)", 
+         -Country.Name, -Country.Code, -Indicator.Name, -Indicator.Code) %>% 
+  select(-Indicator.Code)
+
+
+gdp_col <- gdp_per_capita %>% 
+  gather(key = year, value = "GDP per capita (current US$)", 
+         -Country.Name, -Country.Code, -Indicator.Name) 
