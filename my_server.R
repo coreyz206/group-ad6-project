@@ -125,7 +125,7 @@ my_server <- function(input, output) {
     qpal <- colorQuantile(palette = "Greens", domain = world_map@data[[input_var]], n = 7)
     labels <- paste0("<strong>", world_map@data$Country.Name, "</strong> <br/>",
                      input$datatype_var, ": ", round(world_map@data[[input_var]], digits = 2),
-                     "<br/>GDP per capita: ", round(world_map@data$`GDP per capita, in current US$`, 2) %>%
+                     "<br/>GDP per capita: ", round(world_map@data$`GDP per capita, in current US$`, 2)) %>%
       lapply(htmltools::HTML)
 
     leaflet(world_map) %>%

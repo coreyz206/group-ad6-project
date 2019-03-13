@@ -5,7 +5,6 @@ my_ui <- fluidPage(
   navbarPage("Urban Living vs CO2 Emissions",
     tabPanel("Introduction",
       mainPanel(
-        #textOutput(outputId = "intro"),
         p("The following application formulates a report on the correlations between GDP per capita, the urban population
           as a percentage of the total population and the CO2 emissions by each country. Under each tab, there are different visualizations
           and comparisons of how these indicators influence each other and how they answer questions about cultures in countries across the
@@ -30,7 +29,16 @@ my_ui <- fluidPage(
           to this correlation?")),
         br(),
         p(strong("2. Are there any regional patterns to CO2 emissions in relation to urban population and gdp? Which continents/world regions contribute the most,
-                 what is significant about them, and how has this changed over the past 20 years?"))
+                 what is significant about them, and how has this changed over the past 20 years?")),
+        br(),
+        p(strong("3. ")),
+        br(),
+        br(),
+        p("Below are the links for the sources of the datafiles:"),
+        p(a("All Data", href="https://data.worldbank.org/indicator?tab=all")),
+        p(a("Urban Population", href="https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS?view=chart")),
+        p(a("CO2 Emissions", href="https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart")),
+        p(a("GDP Per Capita", href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart"))
       )  
     ),
     tabPanel("Table",
@@ -54,7 +62,25 @@ my_ui <- fluidPage(
           checkboxInput(inputId = "trendline", label = "Show Trendline", value = FALSE)
         ),
         mainPanel(
-          plotOutput(outputId = "scatter"), textOutput(outputId = "scatter_text")
+          plotOutput(outputId = "scatter"), textOutput(outputId = "scatter_text"),
+          br(),
+          p("The effect of urbanization in a country has a large effect on the amount of CO2 emissions in that country. While there may
+            be another impacting factor, such as the infrastructure and the importance of fossil fuels to an economy, the data shows that
+            there is a strong positive correlation between the amount of urban population and the CO2 emissions. The interesting part about
+            this is that the CO2 are based on a per capita scale which means it already factored in the raw population of each country. This
+            means that the urban population does determine to some degreee, shown by the trendline, that as the urban population of a country
+            increases the amount of CO2 emissions will also increase. This is partially a result of the industrialization that occurs around
+            urban areas."),
+          br(),
+          p("While the actual correlation coeffiecient can be calculated in order to show how these two variables are related on a deeper level
+            then just the trendline, it requires some very deep statistical analysis. Therefore, it is better just show the trendline and how ordered
+            the grouping the of dots are to the trendline. There are very few outliers for this trend and it will require some deeper understanding
+            of the infrastructures in these countries and how they utilize or do not utilize clean energies."),
+          br(),
+          p("Overall, this correlation is important because it shows that there is a way to break the trend of CO2 emissions as the urban population
+            continues to increase. This means that we need to investigate how these countries with high urban population percentages but very low CO2
+            emissions have built their infrastructure and how they harvest and use energy in order to break the chain of increasingly emitting large
+            amounts of CO2 emissions into the ozone layer each year.")
         )
       )
     ),
