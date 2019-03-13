@@ -49,6 +49,19 @@ backup_data <- world_map@data
 
 ### LEAFLET SETUP END
 
+gdp_formatted <- gdp_per_capita %>%
+  gather(key = year, value = "GDP per capita, in current US$", 
+         -Country.Name, -Country.Code, -Indicator.Name) %>%
+  select(-Indicator.Name)
+gdp_formatted$year <- sapply(gdp_formatted$year, substr, 2, 5)
+gdp_formatted$year <- as.numeric(gdp_formatted$year)
+gdp_formatted <- gdp_formatted %>%
+  filter(year < 2015)
+
+all_data_global <- co2_urban_mapdata %>%
+  mutate("GDP per capita, in current US$" = gdp_formatted$`GDP per capita, in current US$`) %>%
+  select(-SUBREGION, -LON, -LAT)
+
 #what needs to be done:
 ##Each of us need to ask a couple of analytical questions that we can then answer using the data?
 ###The requirements say that we can't just include visualizations, we should for each question, but we also need to answer the question

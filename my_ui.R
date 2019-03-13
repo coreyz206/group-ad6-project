@@ -30,7 +30,7 @@ my_ui <- fluidPage(
           to this correlation?")),
         br(),
         p(strong("2. Are there any regional patterns to CO2 emissions in relation to urban population and gdp? Which continents/world regions contribute the most,
-                 what is significant about them, and how has this changed over the past 20 years?")
+                 what is significant about them, and how has this changed over the past 20 years?"))
       )  
     ),
     tabPanel("Table",
@@ -60,7 +60,7 @@ my_ui <- fluidPage(
         )
       )
     ),
-    tabPanel("Map",
+    tabPanel("Global Trends",
       sidebarLayout(
         sidebarPanel(
           selectInput(
@@ -74,15 +74,25 @@ my_ui <- fluidPage(
             label = strong("Select a year"),
             min = 1990,
             max = 2014,
-            value = 1990,
+            value = 2014,
             step = 1,
             sep = ""
           )
         ),
         mainPanel(
-          leafletOutput("map")
+          leafletOutput("map"),
+          p("Firstly, in analyzing geographical patterns, I will put the data on a choropleth map to gain a broad view. After 
+            initial analysis, there do seem to be some patterns between regions in the 2014 dataset. Africa has both a low urban population
+            and low CO2 output per capita, the Americas and Europe have generally above average CO2 output and urban density, and Asia has
+            a low urban population but high per capita CO2 output. While the Americas, Europe, and Africa seem to show a correlation between
+            general urbanization and CO2 output, Asian countries seem to counteract that theory. To further analyze this data, more factors
+            must be brought in."),
+          br(),
+          p("The first new factor I will bring in is GDP, and I will summarize all the data for each region, and show it below."),
+          dataTableOutput(outputId = "region_data_summarized"),
+          p("placeholder text")
         )
     )
-  )
+    )
 )
 )

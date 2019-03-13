@@ -119,12 +119,13 @@ my_server <- function(input, output) {
   output$map <- renderLeaflet({
     input_var <- input$datatype_var
     world_map@data <- backup_data
-    filtered_data <- filter(co2_urban_mapdata, Year == input$year_var) %>%
-      select(Country.Name, Country.Code, `CO2 Emissions (metric tons per capita)`, `Percentage of Population in Urban Areas`)
+    filtered_data <- filter(all_data_global, Year == input$year_var) %>%
+      select(Country.Name, Country.Code, `CO2 Emissions (metric tons per capita)`, `Percentage of Population in Urban Areas`, `GDP per capita, in current US$`)
     world_map@data <- left_join(world_map@data, filtered_data, by = 'Country.Code')
     qpal <- colorQuantile(palette = "Greens", domain = world_map@data[[input_var]], n = 7)
     labels <- paste0("<strong>", world_map@data$Country.Name, "</strong> <br/>",
-                     input$datatype_var, ": ", round(world_map@data[[input_var]], digits = 2)) %>% 
+                     input$datatype_var, ": ", round(world_map@data[[input_var]], digits = 2),
+                     "<br/>GDP per capita: ", round(world_map@data$`GDP per capita, in current US$`, 2) %>% 
       lapply(htmltools::HTML)
     
     leaflet(world_map) %>%
@@ -148,6 +149,15 @@ my_server <- function(input, output) {
           textsize = "15px",
           direction = "auto"
         )
+      )
+  })
+  output$region_data_summarized <- renderDataTable({
+    region_data_subset <- filter(all_data_global, Year == input$year_var) %>%
+      group_by(REGION) %>%
+      summarise(
+        "Country Average CO2 emission per capita" = mean(`CO2 Emissions (metric tons per capita)`),
+        "Country Average Urbanized Population" = mean(`Percentage of Population in Urban Areas`),
+        "Country Average GDP in Current US$" = mean(`GDP per capita, in current US$`)
       )
   })
 }
