@@ -1,11 +1,36 @@
 ### ui file
 
 my_ui <- fluidPage(
-  titlePanel("CO2 Emissions and GDP"),
+  titlePanel("CO2 Emissions and Urbanization"),
   navbarPage("Urban Living vs CO2 Emissions",
-    tabPanel("Brief",
+    tabPanel("Introduction",
       mainPanel(
-        textOutput(outputId = "intro")
+        #textOutput(outputId = "intro"),
+        p("The following application formulates a report on the correlations between GDP per capita, the urban population
+          as a percentage of the total population and the CO2 emissions by each country. Under each tab, there are different visualizations
+          and comparisons of how these indicators influence each other and how they answer questions about cultures in countries across the
+          globe."), 
+          p("First, a little bit of background of these indicators is necessary, outlining both what they are and how they are calculated.
+          GDP per capita, or Gross Domestic Product, is a measure of a country's economy and how many people are living in that country. It is
+          calculated by taking the GDP and then dividing it by the population of that country. So, GDP per capita is a way of putting a number
+          to the standard of living in the countries by measuring the amount of people and the countries gross domestic product. For clarification,
+          gross domestic product is the total amount of goods and services provided by a country during one fiscal year. As for the urban population
+          indicator, it is quite simple, it is the amount the amount of people living in the country divided by the amount of people in the country
+          living in an urban area, giving the resulting percentage of people living in urban areas in each country. Lastly, CO2 emissions are
+          the amount of carbon dioxide released into the atmosphere. In this case, the CO2 emissions are calculated on the scale of metric tons
+          per capita, which means that it is the metric tons of CO2 emissions divided by the total population of each country in order to get a
+          relative scale for each country. This way it is based more on how much they are producing relative to how big their population is, rather
+          than just the amount of CO2 emissions in total. The following report was created to show the effects of urban living and GDP on the CO2
+          emissions from 1990-2016. The data also allows for a look into how industrialization (higher gdp) has impacted urban living and the CO2
+          emissions."),
+        p("The following report will answer a series of questions about the data and some important analysis about the data. The following the questions
+          are listed below as well as the links to the datasets."),
+        br(),
+        p(strong("1. What is the correlation between urban population percentage and the CO2 emissions per capita and which countries are the outliers
+          to this correlation?")),
+        br(),
+        p(strong("2. Are there any regional patterns to CO2 emissions in relation to urban population and gdp? Which continents/world regions contribute the most,
+                 what is significant about them, and how has this changed over the past 20 years?")
       )  
     ),
     tabPanel("Table",
