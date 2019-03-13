@@ -6,6 +6,7 @@ library("maps")
 library("mapproj")
 library("tidyr")
 library("rgdal")
+library("leaflet")
 
 source("analysis.R")
 source("my_ui.R")
