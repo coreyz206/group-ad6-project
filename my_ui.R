@@ -24,8 +24,10 @@ my_ui <- fluidPage(
     tabPanel("Plot",
       sidebarLayout(
         sidebarPanel(
-          sliderInput(inputId = "year_difference", label = "Select a Year Range", 
-                      min = 1990, max = 2014, value = c(1990, 2014)),
+          # sliderInput(inputId = "year_difference", label = "Select a Year Range", 
+          #             min = 1990, max = 2014, value = c(1990, 2014)),
+          selectInput(inputId = "year_plot", label = "Select a Year", 
+                      choices = year_choices, selected = "2014"),
           checkboxInput(inputId = "trendline", label = "Show Trendline", value = FALSE)
         ),
         mainPanel(
@@ -35,6 +37,6 @@ my_ui <- fluidPage(
     )
   )
 )
-
+s
 
 
