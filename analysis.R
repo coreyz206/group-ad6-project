@@ -41,6 +41,8 @@ colnames(world_map@data)[1] <- "Country.Code"
 
 co2_urban_mapdata <- left_join(co2_urban_formatted, world_map@data, by = "Country.Code")
 
+backup_data <- world_map@data
+
 ### LEAFLET SETUP END
 
 #what needs to be done:

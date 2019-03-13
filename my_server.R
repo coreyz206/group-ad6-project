@@ -97,7 +97,10 @@ my_server <- function(input, output) {
   
   output$map <- renderLeaflet({
     input_var <- input$datatype_var
-    world_map@data <- filter(co2_urban_mapdata, Year == input$year_var)
+    world_map@data <- backup_data
+    filtered_data <- filter(co2_urban_mapdata, Year == input$year_var) %>%
+      select(Country.Name, Country.Code, `CO2 Emissions (metric tons per capita)`, `Percentage of Population in Urban Areas`)
+    world_map@data <- left_join(world_map@data, filtered_data, by = 'Country.Code')
     qpal <- colorQuantile(palette = "Greens", domain = world_map@data[[input_var]], n = 7)
     labels <- paste0("<strong>", world_map@data$Country.Name, "</strong> <br/>",
                      input$datatype_var, ": ", round(world_map@data[[input_var]])) %>% 
