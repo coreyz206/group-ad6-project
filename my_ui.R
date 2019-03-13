@@ -29,7 +29,8 @@ my_ui <- fluidPage(
         p(strong("1. What is the correlation between urban population percentage and the CO2 emissions per capita and which countries are the outliers
           to this correlation?")),
         br(),
-        p("")
+        p(strong("2. Are there any regional patterns to CO2 emissions in relation to urban population and gdp? Which continents/world regions contribute the most,
+                 what is significant about them, and how has this changed over the past 20 years?")
       )  
     ),
     tabPanel("Table",

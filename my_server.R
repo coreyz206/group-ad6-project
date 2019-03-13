@@ -124,7 +124,7 @@ my_server <- function(input, output) {
     world_map@data <- left_join(world_map@data, filtered_data, by = 'Country.Code')
     qpal <- colorQuantile(palette = "Greens", domain = world_map@data[[input_var]], n = 7)
     labels <- paste0("<strong>", world_map@data$Country.Name, "</strong> <br/>",
-                     input$datatype_var, ": ", round(world_map@data[[input_var]])) %>% 
+                     input$datatype_var, ": ", round(world_map@data[[input_var]], digits = 2)) %>% 
       lapply(htmltools::HTML)
     
     leaflet(world_map) %>%
