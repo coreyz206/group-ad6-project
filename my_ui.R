@@ -148,7 +148,33 @@ my_ui <- fluidPage(
                  selectInput("countrychoiceb", "Country B Choice", choices = country_names)
       ),
       mainPanel(
-        plotOutput("colcompare"), textOutput("compare_text"))
+        plotOutput("colcompare"), textOutput("compare_text"),
+        br(),
+        p("The Comparison tool allows users not only to view trends in CO2 Emissions, GDP and 
+          Urban Population over a range of years, but also allows users to compare the data from
+          two countries of their choosing. This allows users to compare between the
+          3 trends and deduce correlations (i.e does GDP per Capita effect CO2 Emissions per Capita?) 
+          but also to compare these trends between countries, (i.e does China have more CO2 Emissions per 
+          Capita then the USA, and is there a trend between CO2 Emissions and Urban Population over the years?)"),
+        br(),
+        p("This allows us to bring the Global Information from the other two plots down to a national level and pinpoint
+          specific nations with a great impact on global trends (for example, China) as well as more clearly visualize 
+          trends over the years. Using the `World` Column in the Dataset, we can also compare national level trends to 
+          global trends directly."),
+        br(),
+        p("For Example: Comparing years 1990 and 2014 with the United States and the World, we can see
+          that the USA's Urban Population has increased ever so slightly over the past two decades. The World 
+          Urban Population has also increased over this time, so it's safe to assume that the United States, the 
+          third most populated country in the world is partially responsible for that increase. This trend can also
+          be seen for USA and World GDP. We can also see that the USA emits 4 times more CO2 in Metric tons per capita
+          than the world average, and is thus probably a major contributor to that World Average. However, the world average
+          in CO2 emissions continues to increase while the US has significantly decreased theirs. There must be some other nation
+          responsible."),
+        br(),
+        p("Comparing the USA with China, we see a dramatic increase of CO2 Emissions per capita, and with a large population,
+          China is definitely a large contributor to the overall rise of Global CO2 Emissions. All things considered, they still have
+          a far lower CO2 Emissions per capita than the United States.")
+        )
       )
     )
   )
