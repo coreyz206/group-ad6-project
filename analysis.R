@@ -1,5 +1,10 @@
 ### analysis and data prep
 
+#https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart
+#https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS?view=chart
+#https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart
+
+
 #maternal_mortality_rate <- read.csv("data/maternal_mortality_filtered.csv", stringsAsFactors = FALSE)
 #life_expectancy_at_birth <- read.csv("data/life_expectancy_at_birth_filtered.csv", stringsAsFactors = FALSE)
 #income_per_capita <- read.csv("data/income_per_capita_filtered.csv", stringsAsFactors = FALSE)

@@ -5,29 +5,29 @@ library("ggplot2")
 
 
 my_server <- function(input, output) {
-  output$intro <- renderText({
-    intro_text <- paste("The following application formulates a report on the correlations between GDP per capita, the urban population
-    as a percentage of the total population and the CO2 emissions by each country. Under each tab, there are different visualizations
-    and comparisons of how these indicators influence each other and how they answer questions about cultures in countries across the
-    globe. First, a little bit of background of these indicators is necessary, outlining both what they are and how they are calculated.
-    GDP per capita, or Gross Domestic Product, is a measure of a country's economy and how many people are living in that country. It is
-    calculated by taking the GDP and then dividing it by the population of that country. So, GDP per capita is a way of putting a number
-    to the standard of living in the countries by measuring the amount of people and the countries gross domestic product. For clarification,
-    gross domestic product is the total amount of goods and services provided by a country during one fiscal year. As for the urban population
-    indicator, it is quite simple, it is the amount the amount of people living in the country divided by the amount of people in the country
-    living in an urban area, giving the resulting percentage of people living in urban areas in each country. Lastly, CO2 emissions are
-    the amount of carbon dioxide released into the atmosphere. In this case, the CO2 emissions are calculated on the scale of metric tons
-    per capita, which means that it is the metric tons of CO2 emissions divided by the total population of each country in order to get a
-    relative scale for each country. This way it is based more on how much they are producing relative to how big their population is, rather
-    than just the amount of CO2 emissions in total. The following report was created to show the effects of urban living and GDP on the CO2
-    emissions from 1990-2016. The data also allows for a look into how industrialization (higher gdp) has impacted urban living and the CO2
-    emissions. The following data all comes from the", paste0(a("World Bank Group", href="https://data.worldbank.org/indicator?tab=all"), "."),
-    "As each tab is investigated the questions about these indicators and their correlations are answered. The datasets can be found by clicking
-    on the following links:", paste0(a("Urban Population", href="https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS?view=chart"), ","),
-    paste0(a(href="https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart", "CO2 Emissions"), ","),
-    paste0(a("GDP per capita", href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart"), "."))
-    intro_text
-  })
+  # output$intro <- renderText({
+  #   intro_text <- paste("The following application formulates a report on the correlations between GDP per capita, the urban population
+  #   as a percentage of the total population and the CO2 emissions by each country. Under each tab, there are different visualizations
+  #   and comparisons of how these indicators influence each other and how they answer questions about cultures in countries across the
+  #   globe. First, a little bit of background of these indicators is necessary, outlining both what they are and how they are calculated.
+  #   GDP per capita, or Gross Domestic Product, is a measure of a country's economy and how many people are living in that country. It is
+  #   calculated by taking the GDP and then dividing it by the population of that country. So, GDP per capita is a way of putting a number
+  #   to the standard of living in the countries by measuring the amount of people and the countries gross domestic product. For clarification,
+  #   gross domestic product is the total amount of goods and services provided by a country during one fiscal year. As for the urban population
+  #   indicator, it is quite simple, it is the amount the amount of people living in the country divided by the amount of people in the country
+  #   living in an urban area, giving the resulting percentage of people living in urban areas in each country. Lastly, CO2 emissions are
+  #   the amount of carbon dioxide released into the atmosphere. In this case, the CO2 emissions are calculated on the scale of metric tons
+  #   per capita, which means that it is the metric tons of CO2 emissions divided by the total population of each country in order to get a
+  #   relative scale for each country. This way it is based more on how much they are producing relative to how big their population is, rather
+  #   than just the amount of CO2 emissions in total. The following report was created to show the effects of urban living and GDP on the CO2
+  #   emissions from 1990-2016. The data also allows for a look into how industrialization (higher gdp) has impacted urban living and the CO2
+  #   emissions. The following data all comes from the", paste0(a("World Bank Group", href="https://data.worldbank.org/indicator?tab=all"), "."),
+  #   "As each tab is investigated the questions about these indicators and their correlations are answered. The datasets can be found by clicking
+  #   on the following links:", paste0(a("Urban Population", href="https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS?view=chart"), ","),
+  #   paste0(a(href="https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart", "CO2 Emissions"), ","),
+  #   paste0(a("GDP per capita", href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart"), "."))
+  #   intro_text
+  # })
   
   output$datasets_by_year <- renderDataTable({
     comparison_by_year <- all_three %>% 
@@ -62,31 +62,42 @@ my_server <- function(input, output) {
   })
   
   output$scatter <- renderPlot({
-    # difference <- co2_and_urban %>% 
-    #   mutate(
-    #     co2_change = paste0("X", input$year_difference[2], ".x") - paste0("X", input$year_difference[1], ".x"),
-    #     urban_change = paste0("X", input$year_difference[2], ".y") - paste0("X", input$year_difference[1], ".y")
-    #   )
-    #I need to get this working for changing years, also need to get the trendline to switch on or off based on checkbox
-    scatter_data <- co2_and_urban %>% 
+    scatter_data <- all_three %>% 
       select(
         Country.Name,
         Country.Code.x,
         paste0("X", input$year_plot, ".x"),
-        paste0("X", input$year_plot, ".y")
+        paste0("X", input$year_plot, ".y"),
+        paste0("X", input$year_plot)
       )
     names(scatter_data)[3] <- paste0(input$year_plot, "_co2_emissions")
     names(scatter_data)[4] <- paste0(input$year_plot, "_urban_percent")
     names(scatter_data)[2] <- "Country.Code"
+    names(scatter_data)[5] <- paste0(input$year_plot, "_gdp_per_capita")
     as.data.frame(scatter_data)
-    point_plot <- ggplot(data = scatter_data, mapping = aes(x = scatter_data[, 4], y = scatter_data[, 3])) +
-      geom_point() +
-      geom_smooth(se = FALSE) +
-      labs(
-        title = "Urban Percent Change vs CO2 Emissions",
-        x = "Urban Population (%)",
-        y = "CO2 Emissions (metric tons per capita)"
-      )
+      if (input$trendline) {
+        point_plot <- ggplot(data = scatter_data, mapping = aes(x = scatter_data[, 4], y = scatter_data[, 3], 
+                                                                color = scatter_data[, 5])) +
+          geom_point() +
+          geom_smooth(se = FALSE) +
+          #geom_text(data = filter(all_three, scatter_data[, 4] > 90), aes(label = Country.Name)) +
+          labs(
+            title = "Urban Percent Change vs CO2 Emissions",
+            x = "Urban Population (%)",
+            y = "CO2 Emissions (metric tons per capita)",
+            color = "GDP per capita (Current US$)"
+          )
+      } else {
+        point_plot <- ggplot(data = scatter_data, mapping = aes(x = scatter_data[, 4], y = scatter_data[, 3], 
+                                                                color = scatter_data[, 5])) +
+          geom_point() +
+          labs(
+            title = "Urban Percent Change vs CO2 Emissions",
+            x = "Urban Population (%)",
+            y = "CO2 Emissions (metric tons per capita)",
+            color = "GDP per capita (Current US$)"
+          )
+      }
     point_plot
   })
   
