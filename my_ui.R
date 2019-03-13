@@ -88,9 +88,23 @@ my_ui <- fluidPage(
             general urbanization and CO2 output, Asian countries seem to counteract that theory. To further analyze this data, more factors
             must be brought in."),
           br(),
-          p("The first new factor I will bring in is GDP, and I will summarize all the data for each region, and show it below."),
-          dataTableOutput(outputId = "region_data_summarized"),
-          p("placeholder text")
+          p("One other factor that varies widely by region and could show a profound correlation with our data is gdp per capita.
+            As one can see by hovering over different locations on the map, countries with higher urbanization rates and therefore more
+            CO2 output tend to have a higher gdp per capita. This shows a trend towards industrialization in these countries, which is also
+            shown by their greater co2 outputs."),
+          br(),
+          p("Overall, there are no great regional patterns between CO2 output, urbanization, and GDP per capita. There are definite patterns visible,
+            yet none of them can be attributed to regional causes over the causes already found. Developing countries have low GDP, co2 output, and urbanization,
+            and they seem to be clustered together. Evidence of this is located in both African, Asian, and some South American countries."),
+          br(),
+          p("When one looks at the dataset over the full time period, a large amount of change is visible--but not quite where one might expect it.
+            A snowball effect is illustrated, with the middle-upper countries on the distrition seeing great gains in co2, urbanization, and gdp, while
+            developing countries grow slowly or even stagnate."),
+          br(),
+          p("Greater implications from a regional analysis data provide helpful insight for future endeavors. Visualization of this data can help researchers
+            to combat global warming more effectively by targeting the biggest culprits. Also, the patterns visible can help researchers to predict and
+            combat harmful countries before they begin to urbanize and output massive amounts of CO2. Urbanization itself may also be called into questionl; 
+            if its benefits are worth the risk, or if it's even a substantial cause of the co2 output.")
         )
     )
 

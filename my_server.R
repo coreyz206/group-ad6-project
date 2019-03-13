@@ -125,9 +125,9 @@ my_server <- function(input, output) {
     qpal <- colorQuantile(palette = "Greens", domain = world_map@data[[input_var]], n = 7)
     labels <- paste0("<strong>", world_map@data$Country.Name, "</strong> <br/>",
                      input$datatype_var, ": ", round(world_map@data[[input_var]], digits = 2),
-                     "<br/>GDP per capita: ", round(world_map@data$`GDP per capita, in current US$`, 2) %>% 
+                     "<br/>GDP per capita: ", round(world_map@data$`GDP per capita, in current US$`, 2) %>%
       lapply(htmltools::HTML)
-    
+
     leaflet(world_map) %>%
       addTiles() %>%
       setView(lat=10, lng=0, zoom=2) %>%
@@ -163,38 +163,38 @@ my_server <- function(input, output) {
   })
   
   output$colcompare <- renderPlot({
-    
+
     all_three_col <- left_join(co2_col, urban_col, by = c("Country.Name", "Country.Code" , "year"))
-    
+
     all_three_col <- left_join(all_three_col, gdp_col, by = c("Country.Name", "Country.Code", "year"))
-    
+
     all_three_col <- select(all_three_col, -Indicator.Name.x, -Indicator.Name.y, -Indicator.Name)
-    
+
     all_three_col <- gather(all_three_col, key = Indicator.Name, value = "data", -Country.Name, -Country.Code,-year)
-    
+
     just_series_col <- filter(all_three_col, Indicator.Name == input$serieschoice)
-    
+
     just_series_col <- filter(just_series_col, Country.Name == input$countrychoicea | Country.Name == input$countrychoiceb)
-    
+
     just_series_col <- spread(just_series_col, key = year, value = data)
-    
+
     just_series_col <- select(just_series_col, Country.Name, Country.Code, Indicator.Name, paste0("X", input$year_compare[1]):paste0("X", input$year_compare[2]))
 
-    just_series_col <- gather(just_series_col, key = year, value = "Data", 
+    just_series_col <- gather(just_series_col, key = year, value = "Data",
            -Country.Name, -Country.Code, -Indicator.Name)
-    
-    ggplot(data = just_series_col) + 
+
+    ggplot(data = just_series_col) +
       geom_col(mapping = aes(x = year, Data, fill = Country.Name), position = "dodge") +
       labs(x = paste0(input$countrychoicea, "/", input$countrychoiceb, " (", input$year_compare[1], "-", input$year_compare[2],")"), y = input$serieschoice, fill = "Country Name")
-    
+
   })
-  
+
   output$compare_text <- renderText({
     paste0("This is column chart compares data from two countries of your choosing.
           Right now it is comparing ", input$serieschoice, " between ", input$countrychoicea, " and ",
           input$countrychoiceb, " between years ", input$year_compare[1], " and ", input$year_compare[2], ".")
-    
+
   })
-  
+
 }
 
