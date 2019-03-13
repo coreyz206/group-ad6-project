@@ -4,7 +4,6 @@
 #https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS?view=chart
 #https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart
 
-
 #maternal_mortality_rate <- read.csv("data/maternal_mortality_filtered.csv", stringsAsFactors = FALSE)
 #life_expectancy_at_birth <- read.csv("data/life_expectancy_at_birth_filtered.csv", stringsAsFactors = FALSE)
 #income_per_capita <- read.csv("data/income_per_capita_filtered.csv", stringsAsFactors = FALSE)
@@ -12,6 +11,8 @@
 gdp_per_capita <- read.csv("data/gdp_per_capita_filtered.csv", stringsAsFactors = FALSE)
 co2_emissions <- read.csv("data/co2_emissions_filtered.csv", stringsAsFactors = FALSE)
 urban_population <- read.csv("data/urban_population_percent_filtered.csv", stringsAsFactors = FALSE)
+
+source("colnamefix.R")
 
 ### LEAFLET DATA SETUP ###
 co2_formatted <- co2_emissions %>%
@@ -113,3 +114,25 @@ all_three <- left_join(co2_and_urban, gdp_per_capita, by = "Country.Name")
 ###must have interactive widgets and answer our critical questions
 ####optional, use some css to style our shiny app so that it doesn't look so plain, only if time permitting
 ##We should try to make an interactive map
+
+
+## Data Processing for Comparative Column Chart
+
+country_names <- all_three$Country.Name
+indicator_names<- c(all_three$Indicator.Name.x[1], all_three$Indicator.Name.y[1], all_three$Indicator.Name[1])
+
+co2_col <- co2_emissions %>%
+  gather(key = year, value = "CO2 emissions (metric tons per capita)", 
+         -Country.Name, -Country.Code, -Indicator.Name, -Indicator.Code) %>% 
+  select(-Indicator.Code)
+
+
+urban_col <- urban_population %>%
+  gather(key = year, value = "Urban population (% of total)", 
+         -Country.Name, -Country.Code, -Indicator.Name, -Indicator.Code) %>% 
+  select(-Indicator.Code)
+
+
+gdp_col <- gdp_per_capita %>% 
+  gather(key = year, value = "GDP per capita (current US$)", 
+         -Country.Name, -Country.Code, -Indicator.Name) 

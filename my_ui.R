@@ -93,6 +93,31 @@ my_ui <- fluidPage(
           p("placeholder text")
         )
     )
+
     )
+
+  ),
+  tabPanel("Compare",
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput(
+          inputId = "year_compare", 
+          label = "Years to Compare", 
+          value = c(1990, 2014), 
+          min = 1990, 
+          max = 2014, 
+          sep = ""
+          ),
+        selectInput("serieschoice", "Series Choice", choices = indicator_names),
+        selectInput("countrychoicea", "Country A Choice", choices = country_names),
+        selectInput("countrychoiceb", "Country B Choice", choices = country_names)
+        ),
+      
+    mainPanel(
+      plotOutput("colcompare"), textOutput("compare_text"))
+    )
+  )
+
 )
-)
+
+
