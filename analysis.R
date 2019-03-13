@@ -8,6 +8,7 @@ gdp_per_capita <- read.csv("data/gdp_per_capita_filtered.csv", stringsAsFactors 
 co2_emissions <- read.csv("data/co2_emissions_filtered.csv", stringsAsFactors = FALSE)
 urban_population <- read.csv("data/urban_population_percent_filtered.csv", stringsAsFactors = FALSE)
 
+source("colnamefix.R")
 
 ### LEAFLET DATA SETUP ###
 co2_formatted <- co2_emissions %>%
