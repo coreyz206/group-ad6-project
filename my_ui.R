@@ -1,6 +1,6 @@
 ### ui file
 
-my_ui <- fluidPage(
+my_ui <- fluidPage(theme = shinytheme("cosmo"),
   titlePanel("CO2 Emissions and Urbanization"),
   navbarPage("Urban Living vs CO2 Emissions",
     tabPanel("Introduction",

@@ -7,6 +7,7 @@ library("mapproj")
 library("tidyr")
 library("rgdal")
 library("leaflet")
+library("shinythemes")
 
 source("analysis.R")
 source("my_ui.R")

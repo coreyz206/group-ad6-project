@@ -136,3 +136,5 @@ urban_col <- urban_population %>%
 gdp_col <- gdp_per_capita %>% 
   gather(key = year, value = "GDP per capita (current US$)", 
          -Country.Name, -Country.Code, -Indicator.Name) 
+
+
