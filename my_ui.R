@@ -34,9 +34,30 @@ my_ui <- fluidPage(
           plotOutput(outputId = "scatter"), textOutput(outputId = "scatter_text")
         )
       )
+    ),
+    tabPanel("Map",
+      sidebarLayout(
+        sidebarPanel(
+          selectInput(
+            inputId = "datatype_var",
+            label = strong("Select data to show"),
+            choices = c("CO2 Emissions (metric tons per capita)", "Percentage of Population in Urban Areas"),
+            selected = "CO2 Emissions (metric tons per capita)"
+          ),
+          sliderInput(
+            inputId = "year_var",
+            label = strong("Select a year"),
+            min = 1990,
+            max = 2014,
+            value = 1990,
+            step = 1,
+            sep = ""
+          )
+        ),
+        mainPanel(
+          leafletOutput("map")
+        )
     )
   )
 )
-s
-
-
+)

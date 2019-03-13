@@ -94,4 +94,36 @@ my_server <- function(input, output) {
     point_message <- "I just need to put a placeholder here for the time being"
     point_message
   })
+  
+  output$map <- renderLeaflet({
+    input_var <- input$datatype_var
+    world_map@data <- filter(co2_urban_mapdata, Year == input$year_var)
+    qpal <- colorQuantile(palette = "Greens", domain = world_map@data[[input_var]], n = 7)
+    labels <- paste0("<strong>", world_map@data$Country.Name, "</strong> <br/>",
+                     input$datatype_var, ": ", round(world_map@data[[input_var]])) %>% 
+      lapply(htmltools::HTML)
+    
+    leaflet(world_map) %>%
+      addTiles() %>%
+      setView(lat=10, lng=0, zoom=2) %>%
+      addPolygons(
+        fillColor = ~qpal(world_map@data[[input_var]]),
+        weight = 2,
+        opacity = 1,
+        color = "white",
+        fillOpacity = 0.5,
+        highlight = highlightOptions(
+          weight = 2,
+          color = "#e6e6e6",
+          fillOpacity = .5,
+          bringToFront = TRUE
+        ),
+        label = labels,
+        labelOptions = labelOptions(
+          style = list("font-weight" = "normal", padding = "3px 8px"),
+          textsize = "15px",
+          direction = "auto"
+        )
+      )
+  })
 }

@@ -40,7 +40,6 @@ world_map@data <- select(world_map@data, -FIPS, -ISO2, -UN, -AREA, -POP2005, -NA
 colnames(world_map@data)[1] <- "Country.Code"
 
 co2_urban_mapdata <- left_join(co2_urban_formatted, world_map@data, by = "Country.Code")
-world_map@data <- co2_urban_mapdata
 
 ### LEAFLET SETUP END
 
