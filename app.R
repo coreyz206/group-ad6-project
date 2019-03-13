@@ -5,6 +5,7 @@ library("ggplot2")
 library("maps")
 library("mapproj")
 library("tidyr")
+library("rgdal")
 
 source("analysis.R")
 source("my_ui.R")
