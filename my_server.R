@@ -168,7 +168,7 @@ my_server <- function(input, output) {
     just_series_col <- spread(just_series_col, key = year, value = data)
     
     just_series_col <- select(just_series_col, Country.Name, Country.Code, Indicator.Name, paste0("X", input$year_compare[1]):paste0("X", input$year_compare[2]))
-    
+
     just_series_col <- gather(just_series_col, key = year, value = "Data", 
            -Country.Name, -Country.Code, -Indicator.Name)
     
@@ -176,6 +176,14 @@ my_server <- function(input, output) {
       geom_col(mapping = aes(x = year, Data, fill = Country.Name), position = "dodge") +
       labs(x = paste0(input$countrychoicea, "/", input$countrychoiceb, " (", input$year_compare[1], "-", input$year_compare[2],")"), y = input$serieschoice, fill = "Country Name")
     
+  })
+  
+  output$compare_text <- renderText({
+    paste0("This is column chart compares data from two countries of your choosing.
+          Right now it is comparing ", input$serieschoice, " between ", input$countrychoicea, " and ",
+          input$countrychoiceb, " between years ", input$year_compare[1], " and ", input$year_compare[2], ".")
     
   })
+  
 }
+

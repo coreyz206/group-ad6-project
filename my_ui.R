@@ -30,7 +30,7 @@ my_ui <- fluidPage(
           to this correlation?")),
         br(),
         p(strong("2. Are there any regional patterns to CO2 emissions in relation to urban population and gdp? Which continents/world regions contribute the most,
-                 what is significant about them, and how has this changed over the past 20 years?")
+                 what is significant about them, and how has this changed over the past 20 years?"))
       )  
     ),
     tabPanel("Table",
@@ -101,8 +101,9 @@ my_ui <- fluidPage(
         ),
       
     mainPanel(
-      plotOutput("colcompare"))
+      plotOutput("colcompare"), textOutput("compare_text"))
     )
   )
 )
 )
+
