@@ -49,8 +49,6 @@ my_ui <- fluidPage(
     tabPanel("Plot",
       sidebarLayout(
         sidebarPanel(
-          # sliderInput(inputId = "year_difference", label = "Select a Year Range", 
-          #             min = 1990, max = 2014, value = c(1990, 2014)),
           selectInput(inputId = "year_plot", label = "Select a Year", 
                       choices = year_choices, selected = "2014"),
           checkboxInput(inputId = "trendline", label = "Show Trendline", value = FALSE)
@@ -106,32 +104,28 @@ my_ui <- fluidPage(
             combat harmful countries before they begin to urbanize and output massive amounts of CO2. Urbanization itself may also be called into questionl; 
             if its benefits are worth the risk, or if it's even a substantial cause of the co2 output.")
         )
-    )
-
-    )
-
-  ),
-  tabPanel("Compare",
-    sidebarLayout(
-      sidebarPanel(
-        sliderInput(
-          inputId = "year_compare", 
-          label = "Years to Compare", 
-          value = c(1990, 2014), 
-          min = 1990, 
-          max = 2014, 
-          sep = ""
-          ),
-        selectInput("serieschoice", "Series Choice", choices = indicator_names),
-        selectInput("countrychoicea", "Country A Choice", choices = country_names),
-        selectInput("countrychoiceb", "Country B Choice", choices = country_names)
-        ),
-      
-    mainPanel(
-      plotOutput("colcompare"), textOutput("compare_text"))
+      )
+    ),
+    tabPanel("Compare",
+             sidebarLayout(
+               sidebarPanel(
+                 sliderInput(
+                   inputId = "year_compare", 
+                   label = "Years to Compare", 
+                   value = c(1990, 2014), 
+                   min = 1990, 
+                  max = 2014, 
+                  sep = ""
+                 ),
+                 selectInput("serieschoice", "Series Choice", choices = indicator_names),
+                 selectInput("countrychoicea", "Country A Choice", choices = country_names),
+                 selectInput("countrychoiceb", "Country B Choice", choices = country_names)
+      ),
+      mainPanel(
+        plotOutput("colcompare"), textOutput("compare_text"))
+      )
     )
   )
-
 )
 
 

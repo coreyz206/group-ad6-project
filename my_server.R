@@ -183,10 +183,10 @@ my_server <- function(input, output) {
     just_series_col <- gather(just_series_col, key = year, value = "Data",
            -Country.Name, -Country.Code, -Indicator.Name)
 
-    ggplot(data = just_series_col) +
+    col_chart <- ggplot(data = just_series_col) +
       geom_col(mapping = aes(x = year, Data, fill = Country.Name), position = "dodge") +
       labs(x = paste0(input$countrychoicea, "/", input$countrychoiceb, " (", input$year_compare[1], "-", input$year_compare[2],")"), y = input$serieschoice, fill = "Country Name")
-
+    col_chart
   })
 
   output$compare_text <- renderText({
@@ -195,6 +195,5 @@ my_server <- function(input, output) {
           input$countrychoiceb, " between years ", input$year_compare[1], " and ", input$year_compare[2], ".")
 
   })
-
 }
 
