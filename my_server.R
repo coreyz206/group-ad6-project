@@ -79,9 +79,9 @@ my_server <- function(input, output) {
     names(scatter_data)[4] <- paste0(input$year_plot, "_urban_percent")
     names(scatter_data)[2] <- "Country.Code"
     as.data.frame(scatter_data)
-    point_plot <- ggplot(data = scatter_data) +
-      geom_point(mapping = aes(x = scatter_data[, 4], y = scatter_data[, 3])) +
-      #geom_smooth(input$trendline) +
+    point_plot <- ggplot(data = scatter_data, mapping = aes(x = scatter_data[, 4], y = scatter_data[, 3])) +
+      geom_point() +
+      geom_smooth(se = FALSE) +
       labs(
         title = "Urban Percent Change vs CO2 Emissions",
         x = "Urban Population (%)",
@@ -91,7 +91,17 @@ my_server <- function(input, output) {
   })
   
   output$scatter_text <- renderText({
-    point_message <- "I just need to put a placeholder here for the time being"
+    point_message <- paste("The above scatterplot answers questions about this data and their relation. If the 'Show Trendline'
+                           button is selected then you can see the line of best fit for this data for whichever year is selected. 
+                           In this case, the year selected is", paste0(input$year_plot, ","), "meaning that this was the correlation
+                           for the selected year. Every single year has had a strong correlation between the urban population percentage
+                           and the amount of CO2 emissions per capita. This does not mean that it is the correlation should be automatically
+                           associated because there are many outlying countries. This means that those outlying countries are doing something
+                           and it needs to be investigated. The intention of this scatterplot is to draw attention to how the urban population 
+                           effects the CO2 emissions and why some countries are so successful at having a high urban popultion but also having
+                           very low CO2 emissions. Which means this requires more knowledge about the outliers to trend, and an investigation
+                           on how they regulate CO2 emissions and how they have built their infrastructure, whether it be based on harnessing the
+                           power of clean energy sources or some other cause.")
     point_message
   })
 }
