@@ -2,7 +2,12 @@
 
 my_ui <- fluidPage(
   titlePanel("CO2 Emissions and GDP"),
-  navbarPage("Something",
+  navbarPage("Urban Living vs CO2 Emissions",
+    tabPanel("Brief",
+      mainPanel(
+        textOutput(outputId = "intro")
+      )  
+    ),
     tabPanel("Table",
       sidebarLayout(
         sidebarPanel(
@@ -16,11 +21,22 @@ my_ui <- fluidPage(
         )
       )
     ),
-    tabPanel(
-      
+    tabPanel("Plot",
+      sidebarLayout(
+        sidebarPanel(
+          # sliderInput(inputId = "year_difference", label = "Select a Year Range", 
+          #             min = 1990, max = 2014, value = c(1990, 2014)),
+          selectInput(inputId = "year_plot", label = "Select a Year", 
+                      choices = year_choices, selected = "2014"),
+          checkboxInput(inputId = "trendline", label = "Show Trendline", value = FALSE)
+        ),
+        mainPanel(
+          plotOutput(outputId = "scatter"), textOutput(outputId = "scatter_text")
+        )
+      )
     )
   )
 )
-
+s
 
 

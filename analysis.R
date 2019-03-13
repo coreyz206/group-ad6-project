@@ -71,6 +71,7 @@ gdp_and_urban_change <- mutate(
 )
 year_choices <- colnames(gdp_and_urban_pop[4:30])
 year_choices <- substr(year_choices, 2, 5)
+year_choices <- year_choices[1:25]
 
 gdp_and_co2 <- left_join(gdp_per_capita, co2_emissions, by = "Country.Name")
 gdp_and_co2_change <- mutate(
